@@ -1,0 +1,62 @@
+<div class="list-header">
+    <div nz-row>
+        <div nz-col nzSpan="2" class="search-label">
+            <label>用户名:</label>
+        </div>
+        <div nz-col nzSpan="4">
+            <input nz-input [(ngModel)]="userName" />
+        </div>
+        <div nz-col nzSpan="3" nzOffset="15">
+            <button nz-button (click)="search()" nzType="primary">
+                <i nz-icon nzType="search"></i>查询
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="list-body">
+    <button nz-button (click)="addUser()" nzType="primary">
+        <i nz-icon nzType="plus"></i>新增
+    </button>
+    <nz-table #Table nzTitle="用户列表" nzBordered [nzData]="dataList.list" [nzTotal]="dataList.total"
+        [(nzPageIndex)]="dataList.pageIndex" [(nzPageSize)]="dataList.pageSize" [nzScroll]="{ x: '1100px'}">
+        <thead>
+            <tr>
+                <th nzWidth="100px">用户名</th>
+                <th nzWidth="100px">手机号码</th>
+                <th nzWidth="150px">邮箱</th>
+                <th nzWidth="100px">头像</th>
+                <th nzWidth="150px">创建时间</th>
+                <th nzWidth="200px">描述</th>
+                <th nzWidth="100px">状态</th>
+                <th nzWidth="150px" nzRight="0px">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of Table.data">
+                <td>{{ data.userName }}</td>
+                <td>{{ data.phoneNumber }}</td>
+                <td>{{ data.email }}</td>
+                <td>{{ data.icon }}</td>
+                <td>{{ data.createTime |cvtdate}}</td>
+                <td>{{ data.description }}</td>
+                <td>
+                    <nz-badge *ngIf="data.status == 1" nzText="启用" nzStatus="processing"></nz-badge>
+                    <nz-badge *ngIf="data.status == 0" nzText="禁用" nzStatus="default"></nz-badge>
+                </td>
+                <td nzRight="0px">
+                    <a (click)="editUser(data)">编辑</a>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <a>设置角色</a>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>
+
+<!-- 设置用户角色 -->
+<ng-template #setRole>
+    <nz-select nzMode="multiple" nzPlaceHolder="请选择角色" [(ngModel)]="roleIdList">
+        <nz-option *ngFor="let option of roleOptions" [nzLabel]="option.roleName" [nzValue]="option.id"></nz-option>
+    </nz-select>
+</ng-template>

@@ -1,0 +1,45 @@
+<nz-layout class="app-layout">
+    <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
+        [nzTrigger]="null">
+        <div class="sidebar-logo">
+            <a target="_blank">
+                <img src="assets/icons/store.svg" alt="logo">
+                <h1>mall admin</h1>
+            </a>
+        </div>
+        <ul nz-menu nzMode="inline" [nzTheme]="'dark'" [nzInlineCollapsed]="isCollapsed">
+            <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menus }"></ng-container>
+            <ng-template #menuTpl let-menus>
+                <ng-container *ngFor="let menu of menus">
+                    <li *ngIf="menu.children.length == 0" nz-menu-item>
+                        <i nz-icon [nzType]="menu.icon" *ngIf="menu.icon"></i>
+                        <a style="display:inline;" [routerLink]="[menu.url]" routerLinkActive="router-link-active">
+                            <span>{{ menu.menuName }}</span>
+                        </a>
+                    </li>
+                    <li *ngIf="menu.children.length > 0" nz-submenu [nzTitle]="menu.menuName" [nzIcon]="menu.icon">
+                        <ul>
+                            <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menu.children }">
+                            </ng-container>
+                        </ul>
+                    </li>
+                </ng-container>
+            </ng-template>
+        </ul>
+    </nz-sider>
+    <nz-layout>
+        <nz-header>
+            <div class="app-header">
+                <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+                    <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+                </span>
+            </div>
+        </nz-header>
+        <nz-content>
+            <!-- 顶部tab标签 -->
+            <div class="inner-content">
+                <router-outlet></router-outlet>
+            </div>
+        </nz-content>
+    </nz-layout>
+</nz-layout>

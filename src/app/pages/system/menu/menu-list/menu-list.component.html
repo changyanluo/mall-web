@@ -1,0 +1,50 @@
+<div class="list-body">
+    <button nz-button (click)="addMenu()" nzType="primary">
+        <i nz-icon nzType="plus"></i>新增
+    </button>
+    <nz-table nzTitle="菜单列表" #expandTable nzBordered [nzData]="menuList">
+        <thead>
+            <tr>
+                <th>名称</th>
+                <th>图标</th>
+                <th>地址</th>
+                <th>创建时间</th>
+                <th>描述</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: expandTable.data }"></ng-container>
+            <ng-template #menuTpl let-menus>
+                <ng-container *ngFor="let menu of menus">
+                    <tr>
+                        <td [nzIndentSize]="menu.level * 20" [nzShowExpand]="menu.children.length > 0"
+                            [nzExpand]="menu.expand" (nzExpandChange)="collapse(menu, $event)">
+                            {{ menu.menuName }}
+                        </td>
+                        <td>
+                            <i nz-icon [nzType]="menu.icon" *ngIf="menu.icon"></i>
+                        </td>
+                        <td>{{ menu.url }}</td>
+                        <td>{{ menu.createTime |cvtdate}}</td>
+                        <td>{{ menu.description }}</td>
+                        <td>
+                            <nz-badge *ngIf="menu.status == 1" nzText="启用" nzStatus="processing"></nz-badge>
+                            <nz-badge *ngIf="menu.status == 0" nzText="禁用" nzStatus="default"></nz-badge>
+                        </td>
+                        <td>
+                            <a (click)="addMenu(menu.id,menu.level)">新增子菜单</a>
+                            <nz-divider nzType="vertical"></nz-divider>
+                            <a (click)="editMenu(menu)">编辑</a>
+                        </td>
+                    </tr>
+                    <ng-container *ngIf="menu.expand && menu.children.length > 0">
+                        <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menu.children }">
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+            </ng-template>
+        </tbody>
+    </nz-table>
+</div>
