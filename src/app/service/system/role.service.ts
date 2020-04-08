@@ -35,7 +35,7 @@ export class RoleService {
     return this.http.postForm<ServerResult<UserMenu[]>>(`${this.roleUrl}/getRoleMenuList`, { roleId: roleId });
   }
 
-  setRoleMenu(roleId: number, menuIdList: number) {
+  setRoleMenu(roleId: number, menuIdList: number[]) {
     return this.http.postForm<ServerResult<number>>(`${this.roleUrl}/setRoleMenu`, { roleId: roleId, menuIdList: menuIdList });
   }
 }

@@ -47,7 +47,7 @@
                 <td nzRight="0px">
                     <a (click)="editUser(data)">编辑</a>
                     <nz-divider nzType="vertical"></nz-divider>
-                    <a>设置角色</a>
+                    <a (click)="setRole(data.id,setRoletmp)">设置角色</a>
                 </td>
             </tr>
         </tbody>
@@ -55,8 +55,8 @@
 </div>
 
 <!-- 设置用户角色 -->
-<ng-template #setRole>
-    <nz-select nzMode="multiple" nzPlaceHolder="请选择角色" [(ngModel)]="roleIdList">
+<ng-template #setRoletmp>
+    <nz-select class="roleSelect" nzMode="multiple" nzPlaceHolder="请选择角色" [(ngModel)]="roleIdList">
         <nz-option *ngFor="let option of roleOptions" [nzLabel]="option.roleName" [nzValue]="option.id"></nz-option>
     </nz-select>
 </ng-template>

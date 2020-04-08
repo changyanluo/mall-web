@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { ServerResult, PageList } from '../../dto/system/server-result';
 import { User } from '../../dto/system/user';
+import { Role } from '../../dto/system/role';
 
 @Injectable({
   providedIn: 'root'
@@ -32,10 +33,10 @@ export class UserService {
   }
 
   getUserRoleList(userId: number) {
-    return this.http.postForm<ServerResult<number>>(`${this.userUrl}/getUserRoleList`, { userId: userId });
+    return this.http.postForm<ServerResult<Role[]>>(`${this.userUrl}/getUserRoleList`, { userId: userId });
   }
 
-  setUserRole(userId: number, roleIdList: number) {
+  setUserRole(userId: number, roleIdList: number[]) {
     return this.http.postForm<ServerResult<number>>(`${this.userUrl}/setUserRole`, { userId: userId, roleIdList: roleIdList });
   }
 }

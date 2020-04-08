@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../../../service/system/user.service';
+import { Component, OnInit,ViewChild,TemplateRef } from '@angular/core';
 import { Role } from '../../../../dto/system/role';
 import { PageList } from '../../../../dto/system/server-result';
-import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { RoleEntryComponent } from '../role-entry/role-entry.component';
 import { RoleService } from '../../../../service/system/role.service';
+import { NzFormatEmitEvent, NzTreeNodeOptions } from 'ng-zorro-antd/core';
+import { NzTreeComponent } from 'ng-zorro-antd/tree';
 
 @Component({
   selector: 'app-role-list',
@@ -13,6 +14,7 @@ import { RoleService } from '../../../../service/system/role.service';
 })
 export class RoleListComponent implements OnInit {
 
+  @ViewChild('menuTreeComponent') menuTreeComponent: NzTreeComponent;
   roleName = '';
   dataList = new PageList();
 
@@ -71,5 +73,10 @@ export class RoleListComponent implements OnInit {
     modal.afterClose.subscribe(ret => {
       if (ret) this.search();
     });
+  }
+
+  //设置用户角色
+  setMenu(roleId: number, template: TemplateRef<{}>) {
+    
   }
 }
