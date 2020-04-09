@@ -41,15 +41,9 @@
                 <td nzRight="0px">
                     <a (click)="editRole(data)">编辑</a>
                     <nz-divider nzType="vertical"></nz-divider>
-                    <a (click)="setMenu(data.id,setMenuTmp)">设置菜单</a>
+                    <a (click)="setMenu(data.id)">设置菜单</a>
                 </td>
             </tr>
         </tbody>
     </nz-table>
 </div>
-
-<!-- 设置角色菜单 -->
-<ng-template #setMenuTmp>
-    <nz-tree #menuTreeComponent [nzData]="nodes" nzMultiple nzCheckable>
-    </nz-tree>
-</ng-template>
