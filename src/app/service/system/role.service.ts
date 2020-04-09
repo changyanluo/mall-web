@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ServerResult, PageList } from '../../dto/system/server-result';
 import { HttpService } from './http.service';
 import { Role } from '../../dto/system/role';
-import { UserMenu } from '../../dto/system/menu';
+import { Menu } from '../../dto/system/menu';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +32,7 @@ export class RoleService {
   }
 
   getRoleMenuList(roleId: number) {
-    return this.http.postForm<ServerResult<UserMenu[]>>(`${this.roleUrl}/getRoleMenuList`, { roleId: roleId });
+    return this.http.postForm<ServerResult<Menu[]>>(`${this.roleUrl}/getRoleMenuList`, { roleId: roleId });
   }
 
   setRoleMenu(roleId: number, menuIdList: number[]) {

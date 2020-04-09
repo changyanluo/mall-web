@@ -3,6 +3,7 @@ import { HttpService } from './http.service';
 import { ServerResult, PageList } from '../../dto/system/server-result';
 import { User } from '../../dto/system/user';
 import { Role } from '../../dto/system/role';
+import { UserMenu } from '../../dto/system/menu';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,10 @@ export class UserService {
 
   getUserRoleList(userId: number) {
     return this.http.postForm<ServerResult<Role[]>>(`${this.userUrl}/getUserRoleList`, { userId: userId });
+  }
+
+  getUserMenuList(userId: number) {
+    return this.http.postForm<ServerResult<UserMenu[]>>(`${this.userUrl}/getUserMenuList`, { userId: userId });
   }
 
   setUserRole(userId: number, roleIdList: number[]) {

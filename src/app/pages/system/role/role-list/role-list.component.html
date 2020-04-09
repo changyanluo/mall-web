@@ -50,7 +50,6 @@
 
 <!-- 设置角色菜单 -->
 <ng-template #setMenuTmp>
-    <nz-tree #menuTreeComponent [nzData]="nodes" nzCheckable (nzClick)="nzClick($event)"
-        (nzCheckBoxChange)="nzCheck($event)" (nzExpandChange)="nzCheck($event)">
+    <nz-tree #menuTreeComponent [nzData]="nodes" nzMultiple nzCheckable>
     </nz-tree>
 </ng-template>

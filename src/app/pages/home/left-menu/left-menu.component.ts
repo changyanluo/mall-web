@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RoleService } from '../../../service/system/role.service'
+import { UserService } from '../../../service/system/user.service'
 import { UserMenu } from '../../../dto/system/menu';
 import { NzMessageService } from 'ng-zorro-antd';
 
@@ -13,10 +13,10 @@ export class LeftMenuComponent implements OnInit {
   isCollapsed = false;
   menus: UserMenu[];
 
-  constructor(private roleService: RoleService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.roleService.getRoleMenuList(1).subscribe(res => {
+    this.userService.getUserMenuList(1).subscribe(res => {
       this.menus = res.data;
     });
   }
