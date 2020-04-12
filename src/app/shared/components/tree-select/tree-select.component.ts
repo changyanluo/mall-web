@@ -40,7 +40,7 @@ export class TreeSelectComponent implements OnInit {
     for (let item of initData) {
       let node: NzTreeNodeOptions = {
         key: item.id.toString(),
-        title: item[this.titleAttr],
+        title: item[this.titleAttr]
       };
       if (item.children.length > 0) {
         node.children = this.convertNode(item.children);
@@ -59,7 +59,7 @@ export class TreeSelectComponent implements OnInit {
   getSelMenuId(nodes: NzTreeNodeOptions[]) {
     for (let node of nodes) {
       if (node.isLeaf) {
-        if (this.controlSelIds.indexOf(node.key) > 0) {
+        if (this.controlSelIds.indexOf(node.key) > -1) {
           this.SelectedIds.push(Number.parseInt(node.key));
         }
       }

@@ -14,7 +14,7 @@ export class RoleEntryComponent implements OnInit {
   role: Role;
 
   constructor(private roleService: RoleService,
-    private commonService: CommonService,
+    public commonService: CommonService,
     private modal: NzModalRef,
     private messageService: NzMessageService) { }
 
@@ -26,14 +26,17 @@ export class RoleEntryComponent implements OnInit {
       this.messageService.error('请输入角色名！');
       return;
     }
+    this.commonService.isLoading = true;
     if (!this.role.id) {
       this.roleService.addRole(this.role).subscribe(() => {
+        this.commonService.isLoading = false;
         this.messageService.success('新增成功!');
         this.modal.destroy(true);
       });
     }
     else {
       this.roleService.updateRole(this.role).subscribe(() => {
+        this.commonService.isLoading = false;
         this.messageService.success('修改成功!');
         this.modal.destroy(true);
       });

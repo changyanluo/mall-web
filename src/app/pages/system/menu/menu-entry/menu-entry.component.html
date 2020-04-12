@@ -45,3 +45,9 @@
         </nz-radio-group>
     </div>
 </div>
+
+<div nz-row class="modal-footer">
+    <div nz-col nzSpan="4" nzOffset="20">
+        <button nz-button nzType="primary" [nzLoading]="commonService.isLoading" (click)="save()">保存</button>
+    </div>
+</div>

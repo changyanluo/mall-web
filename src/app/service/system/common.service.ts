@@ -6,6 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class CommonService {
 
+  isLoading = false;
+
   constructor(
   ) { }
   

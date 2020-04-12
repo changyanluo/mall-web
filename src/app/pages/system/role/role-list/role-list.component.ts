@@ -4,11 +4,11 @@ import { PageList } from '../../../../dto/system/server-result';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { RoleEntryComponent } from '../role-entry/role-entry.component';
 import { RoleService } from '../../../../service/system/role.service';
-import { NzFormatEmitEvent, NzTreeNodeOptions } from 'ng-zorro-antd/core';
 import { NzMessageService } from 'ng-zorro-antd';
 import { MenuService } from '../../../../service/system/menu.service';
 import { TreeSelectComponent } from '../../../../shared/components/tree-select/tree-select.component';
 import { forkJoin } from 'rxjs';
+import { CommonService } from '../../../../service/system/common.service';
 
 @Component({
   selector: 'app-role-list',
@@ -22,6 +22,7 @@ export class RoleListComponent implements OnInit {
 
   constructor(private roleService: RoleService,
     private menuService: MenuService,
+    public commonService: CommonService,
     private messageService: NzMessageService,
     private modalService: NzModalService) { }
 
@@ -68,11 +69,7 @@ export class RoleListComponent implements OnInit {
       nzContent: RoleEntryComponent,
       nzMaskClosable: false,
       nzComponentParams: { role: JSON.parse(JSON.stringify(selectedRole)) },
-      nzFooter: [{
-        label: '保存',
-        type: 'primary',
-        onClick: (instance: any) => instance.save()
-      }]
+      nzFooter: null
     });
     modal.afterClose.subscribe(ret => {
       if (ret) this.search();
@@ -81,8 +78,10 @@ export class RoleListComponent implements OnInit {
 
   //给角色配置菜单
   setMenu(roleId: number) {
+    this.commonService.isLoading = true;
     forkJoin(this.roleService.getRoleMenuList(roleId), this.menuService.getMenuList(''))
       .subscribe(res => {
+        this.commonService.isLoading = false;
         let SelectedKeys = [];
         for (let roleMenu of res[0].data) {
           SelectedKeys.push(roleMenu.id.toString());

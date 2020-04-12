@@ -1,10 +1,11 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { UserService } from '../../../../service/system/user.service';
 import { RoleService } from '../../../../service/system/role.service';
+import { CommonService } from '../../../../service/system/common.service';
 import { User } from '../../../../dto/system/user';
 import { Role } from '../../../../dto/system/role';
 import { PageList } from '../../../../dto/system/server-result';
-import { NzModalService, NzModalRef } from 'ng-zorro-antd/modal';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd';
 import { UserEntryComponent } from '../user-entry/user-entry.component';
 import { forkJoin } from 'rxjs';
@@ -21,9 +22,13 @@ export class UserListComponent implements OnInit {
   roleIdList: number[];
   roleOptions: Role[];
 
+  selectedUserId: number;
+  isVisible = false;
+
   constructor(private userService: UserService,
     private roleService: RoleService,
     private messageService: NzMessageService,
+    public commonService: CommonService,
     private modalService: NzModalService) { }
 
   ngOnInit(): void {
@@ -72,11 +77,7 @@ export class UserListComponent implements OnInit {
       nzContent: UserEntryComponent,
       nzMaskClosable: false,
       nzComponentParams: { user: JSON.parse(JSON.stringify(selectedUser)) },
-      nzFooter: [{
-        label: '保存',
-        type: 'primary',
-        onClick: (instance: any) => instance.save()
-      }]
+      nzFooter: null
     });
     modal.afterClose.subscribe(ret => {
       if (ret) this.search();
@@ -84,25 +85,23 @@ export class UserListComponent implements OnInit {
   }
 
   //设置用户角色
-  setRole(userId: number, template: TemplateRef<{}>) {
+  setRole(userId: number) {
     this.roleIdList = [];
+    this.selectedUserId = userId;
     forkJoin([this.roleService.getAllRole(''), this.userService.getUserRoleList(userId)])
       .subscribe(res => {
         this.roleOptions = res[0].data;
         for (let role of res[1].data) this.roleIdList.push(role.id);
-        const modal = this.modalService.create({
-          nzTitle: '设置用户角色',
-          nzContent: template,
-          nzMaskClosable: false,
-          nzFooter: [{
-            label: '保存',
-            type: 'primary',
-            onClick: () => this.userService.setUserRole(userId, this.roleIdList).subscribe(() => {
-              this.messageService.success('设置成功!');
-              modal.destroy();
-            })
-          }]
-        });
+        this.isVisible = true;
       });
+  }
+
+  save() {
+    this.commonService.isLoading = true;
+    this.userService.setUserRole(this.selectedUserId, this.roleIdList).subscribe(() => {
+      this.commonService.isLoading = false;
+      this.messageService.success('设置成功!');
+      this.isVisible = false;
+    })
   }
 }

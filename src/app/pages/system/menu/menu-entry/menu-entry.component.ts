@@ -14,7 +14,7 @@ export class MenuEntryComponent implements OnInit {
   menu:Menu;
 
   constructor(private menuService: MenuService,
-    private commonService: CommonService,
+    public commonService: CommonService,
     private modal: NzModalRef,
     private messageService: NzMessageService) { }
 
@@ -30,14 +30,17 @@ export class MenuEntryComponent implements OnInit {
       this.messageService.error('请输入地址！');
       return false;
     }
+    this.commonService.isLoading = true;
     if (!this.menu.id) {
       this.menuService.addMenu(this.menu).subscribe(() => {
+        this.commonService.isLoading = false;
         this.messageService.success('新增成功!');
         this.modal.destroy(true);
       });
     }
     else {
       this.menuService.updateMenu(this.menu).subscribe(() => {
+        this.commonService.isLoading = false;
         this.messageService.success('修改成功!');
         this.modal.destroy(true);
       });

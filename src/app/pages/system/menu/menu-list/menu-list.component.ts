@@ -80,11 +80,7 @@ export class MenuListComponent implements OnInit {
       nzContent: MenuEntryComponent,
       nzMaskClosable: false,
       nzComponentParams: { menu: JSON.parse(JSON.stringify(selectedMenu)) },
-      nzFooter: [{
-        label: '保存',
-        type: 'primary',
-        onClick: (instance: any) => instance.save()
-      }]
+      nzFooter: null
     });
     modal.afterClose.subscribe(ret => {
       if (ret) this.search();

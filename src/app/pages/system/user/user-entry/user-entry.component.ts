@@ -15,7 +15,7 @@ export class UserEntryComponent implements OnInit {
 
   constructor(private userService: UserService,
     private modal: NzModalRef,
-    private commonService: CommonService,
+    public commonService: CommonService,
     private messageService: NzMessageService) { }
 
   ngOnInit(): void {
@@ -30,8 +30,10 @@ export class UserEntryComponent implements OnInit {
       this.messageService.error('请输入密码！');
       return;
     }
+    this.commonService.isLoading = true;
     if (!this.user.id) {
       this.userService.addUser(this.user).subscribe(() => {
+        this.commonService.isLoading = false;
         this.messageService.success('新增成功!');
         this.modal.destroy(true);
       }
@@ -39,10 +41,10 @@ export class UserEntryComponent implements OnInit {
     }
     else {
       this.userService.updateUser(this.user).subscribe(() => {
+        this.commonService.isLoading = false;
         this.messageService.success('修改成功!');
         this.modal.destroy(true);
-      }
-      );
+      });
     }
   }
 }
