@@ -7,6 +7,8 @@ import { RoleListComponent } from './role/role-list/role-list.component';
 import { RoleEntryComponent } from './role/role-entry/role-entry.component';
 import { MenuListComponent } from './menu/menu-list/menu-list.component';
 import { MenuEntryComponent } from './menu/menu-entry/menu-entry.component';
+import { AuthorityListComponent } from './authority/authority-list/authority-list.component';
+import { AuthorityEntryComponent } from './authority/authority-entry/authority-entry.component';
 
 @NgModule({
     declarations: [
@@ -15,7 +17,9 @@ import { MenuEntryComponent } from './menu/menu-entry/menu-entry.component';
         RoleListComponent,
         RoleEntryComponent,
         MenuListComponent,
-        MenuEntryComponent],
+        MenuEntryComponent,
+        AuthorityListComponent,
+        AuthorityEntryComponent],
     imports: [
         SystemRoutingModule,
         SharedModule

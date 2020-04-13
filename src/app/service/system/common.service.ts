@@ -7,7 +7,8 @@ import { Injectable } from '@angular/core';
 export class CommonService {
 
   isLoading = false;
-
+  token:string;
+  
   constructor(
   ) { }
   

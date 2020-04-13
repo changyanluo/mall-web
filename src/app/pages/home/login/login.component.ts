@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../../service/system/user.service';
 import { NzMessageService } from 'ng-zorro-antd';
+import { CommonService } from '../../../service/system/common.service';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
+    public commonService: CommonService,
     private messageService: NzMessageService) { }
 
   ngOnInit(): void {
@@ -36,6 +38,7 @@ export class LoginComponent implements OnInit {
         this.validateForm.controls['password'].value)
         .subscribe(res => {
           this.messageService.success('登录成功！');
+          this.commonService.token = res.message;
           this.router.navigateByUrl('admin/sys/user');
         })
     }
