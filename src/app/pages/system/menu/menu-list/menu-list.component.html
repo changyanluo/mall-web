@@ -2,7 +2,7 @@
     <button nz-button (click)="addMenu()" nzType="primary">
         <i nz-icon nzType="plus"></i>新增
     </button>
-    <nz-table nzTitle="菜单列表" #expandTable nzBordered [nzData]="menuList">
+    <nz-table nzTitle="菜单列表" #expandTable nzBordered [nzData]="menuList" nzShowPagination="false">
         <thead>
             <tr>
                 <th>名称</th>

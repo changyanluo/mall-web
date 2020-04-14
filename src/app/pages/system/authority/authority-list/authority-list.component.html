@@ -1,1 +1,46 @@
-<p>authority-list works!</p>
+<div class="list-body">
+    <button nz-button (click)="addAuthority()" nzType="primary">
+        <i nz-icon nzType="plus"></i>新增
+    </button>
+    <nz-table nzTitle="权限列表" #expandTable nzBordered [nzData]="authorityList" nzShowPagination="false">
+        <thead>
+            <tr>
+                <th>名称</th>
+                <th>权限值</th>
+                <th>创建时间</th>
+                <th>描述</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngTemplateOutlet="authorityTpl; context: { $implicit: expandTable.data }"></ng-container>
+            <ng-template #authorityTpl let-authoritys>
+                <ng-container *ngFor="let authority of authoritys">
+                    <tr>
+                        <td [nzIndentSize]="authority.level * 20" [nzShowExpand]="authority.children.length > 0"
+                            [nzExpand]="authority.expand" (nzExpandChange)="collapse(authority, $event)">
+                            {{ authority.name }}
+                        </td>
+                        <td>{{ authority.value }}</td>
+                        <td>{{ authority.createTime |cvtdate}}</td>
+                        <td>{{ authority.description }}</td>
+                        <td>
+                            <nz-badge *ngIf="authority.status == 1" nzText="启用" nzStatus="processing"></nz-badge>
+                            <nz-badge *ngIf="authority.status == 0" nzText="禁用" nzStatus="default"></nz-badge>
+                        </td>
+                        <td>
+                            <a (click)="addAuthority(authority.id,authority.level)">新增子菜单</a>
+                            <nz-divider nzType="vertical"></nz-divider>
+                            <a (click)="editAuthority(authority)">编辑</a>
+                        </td>
+                    </tr>
+                    <ng-container *ngIf="authority.expand && authority.children.length > 0">
+                        <ng-container *ngTemplateOutlet="authorityTpl; context: { $implicit: authority.children }">
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+            </ng-template>
+        </tbody>
+    </nz-table>
+</div>

@@ -1,1 +1,45 @@
-<p>authority-entry works!</p>
+<div nz-row>
+    <div nz-col nzSpan="6" class="form-entry">
+        <label>名称:</label>
+    </div>
+    <div nz-col nzSpan="16" class="form-entry">
+        <input nz-input [(ngModel)]="authority.name" autocomplete="off"/>
+    </div>
+</div>
+
+<div nz-row>
+    <div nz-col nzSpan="6" class="form-entry">
+        <label>权限值(地址):</label>
+    </div>
+    <div nz-col nzSpan="16">
+        <input nz-input [(ngModel)]="authority.value" autocomplete="off" />
+    </div>
+</div>
+
+<div nz-row>
+    <div nz-col nzSpan="6" class="form-entry">
+        <label>描述:</label>
+    </div>
+    <div nz-col nzSpan="16">
+        <input nz-input [(ngModel)]="authority.description" />
+    </div>
+</div>
+
+<div nz-row>
+    <div nz-col nzSpan="6" class="form-entry">
+        <label>状态:</label>
+    </div>
+    <div nz-col nzSpan="16">
+        <nz-radio-group [(ngModel)]="authority.status">
+            <label nz-radio [nzValue]="1">启用</label>
+            <label nz-radio [nzValue]="0">禁用</label>
+        </nz-radio-group>
+    </div>
+</div>
+
+<div nz-row class="modal-footer">
+    <div nz-col nzSpan="4" nzOffset="20">
+        <button nz-button nzType="primary" [nzLoading]="commonService.isLoading" (click)="save()">保存</button>
+    </div>
+</div>
+
