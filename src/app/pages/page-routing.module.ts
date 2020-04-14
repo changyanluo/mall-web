@@ -5,7 +5,6 @@ import { LeftMenuComponent } from './home/left-menu/left-menu.component';
 import { TopMenuComponent } from './home/top-menu/top-menu.component';
 
 const routes: Routes = [
-    { path: '', pathMatch: 'full', redirectTo: '/passport' },
     { path: 'passport', component: LoginComponent },
     {//后台管理界面
         path: 'admin', component: LeftMenuComponent,

@@ -71,7 +71,7 @@ export class AuthorityListComponent implements OnInit {
 
   editAuthority(selectedAuthority: Authority) {
     const modal = this.modalService.create({
-      nzTitle: '修改菜单',
+      nzTitle: '修改权限',
       nzContent: AuthorityEntryComponent,
       nzMaskClosable: false,
       nzComponentParams: { authority: JSON.parse(JSON.stringify(selectedAuthority)) },

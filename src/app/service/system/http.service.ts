@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { CommonService } from './common.service';
 
 //http请求服务
 @Injectable({
@@ -12,14 +11,13 @@ export class HttpService {
   server = environment.apiUrl;
 
   constructor(
-    private httpClient: HttpClient,
-    public commonService: CommonService,
+    private httpClient: HttpClient
   ) { }
 
   post<T>(address: string, body: any) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': this.commonService.token || ''
+      'Authorization': sessionStorage.getItem('token')
     });
     return this.httpClient.post<T>(this.server + address, body, {
       headers: headers
@@ -28,9 +26,12 @@ export class HttpService {
 
   //form提交
   postForm<T>(address: string, body: any) {
-    const headers = new HttpHeaders({
-      'Authorization': this.commonService.token || ''
-    });
+    let headers: HttpHeaders = null;
+    if (!address.endsWith('login')) {
+      headers = new HttpHeaders({
+        'Authorization': sessionStorage.getItem('token')
+      });
+    }
     let data = new FormData();
     for (let key in body) {
       data.append(key, body[key]);
