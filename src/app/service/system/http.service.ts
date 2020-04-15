@@ -28,9 +28,7 @@ export class HttpService {
   postForm<T>(address: string, body: any) {
     let headers: HttpHeaders = null;
     if (!address.endsWith('login')) {
-      headers = new HttpHeaders({
-        'Authorization': sessionStorage.getItem('token')
-      });
+      headers = new HttpHeaders().set('Authorization', sessionStorage.getItem('token'));
     }
     let data = new FormData();
     for (let key in body) {

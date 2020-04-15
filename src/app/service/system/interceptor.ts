@@ -13,13 +13,15 @@ import { tap, catchError } from 'rxjs/operators';
 import { NzMessageService } from 'ng-zorro-antd';
 import { ServerResult } from '../../dto/system/server-result';
 import { CommonService } from './common.service';
+import { Router } from '@angular/router';
 
 //http请求拦截器
 @Injectable()
 export class Interceptor implements HttpInterceptor {
 
     constructor(private message: NzMessageService,
-        public commonService: CommonService) {
+        public commonService: CommonService,
+        private router: Router) {
 
     }
 
@@ -28,19 +30,19 @@ export class Interceptor implements HttpInterceptor {
         return next.handle(req).pipe(
             tap((event: HttpEvent<ServerResult<any>>) => {  //根据返回的code提示消息
                 if (event instanceof HttpResponse && event.status === 200) {
-                    if (event.body.code === 3) {//会话过期
-                        this.message.warning("已超时，请重新登录!");
-                        this.commonService.isLoading = false;
-                    }
-                    else if (event.body.code !== 1) {
+                    if (event.body.code !== 1) {
                         this.message.error(event.body.message);
                         this.commonService.isLoading = false;
                     }
                 }
             }),
             catchError((err: HttpErrorResponse) => {
-                this.message.error(JSON.stringify(err));
+                this.message.error(err.error.text);
                 this.commonService.isLoading = false;
+                if (err.error.text === '会话过期!') {
+                    this.router.navigateByUrl('/passport');
+                    sessionStorage.removeItem('token');
+                }
                 return throwError("error");
             })
         )
