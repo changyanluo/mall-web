@@ -1,0 +1,59 @@
+<div nz-row>
+    <div nz-col nzSpan="6" class="form-entry">
+        <label>商品名:</label>
+    </div>
+    <div nz-col nzSpan="16" class="form-entry">
+        <input nz-input [(ngModel)]="goods.goodsName" />
+    </div>
+</div>
+
+<div nz-row>
+    <div nz-col nzSpan="6" class="form-entry">
+        <label>商品标题:</label>
+    </div>
+    <div nz-col nzSpan="16" class="form-entry">
+        <input nz-input [(ngModel)]="goods.title" />
+    </div>
+</div>
+
+<div nz-row>
+    <div nz-col nzSpan="6" class="form-entry">
+        <label>图片:</label>
+    </div>
+    <div nz-col nzSpan="16" class="form-entry">
+        <input nz-input [(ngModel)]="goods.image" />
+    </div>
+</div>
+
+<div nz-row>
+    <div nz-col nzSpan="6" class="form-entry">
+        <label>描述:</label>
+    </div>
+    <div nz-col nzSpan="16" class="form-entry">
+        <input nz-input [(ngModel)]="goods.description" />
+    </div>
+</div>
+
+<div nz-row>
+    <div nz-col nzSpan="6" class="form-entry">
+        <label>价格:</label>
+    </div>
+    <div nz-col nzSpan="16" class="form-entry">
+        <nz-input-number [(ngModel)]="goods.price" [nzStep]="1"></nz-input-number>
+    </div>
+</div>
+
+<div nz-row>
+    <div nz-col nzSpan="6" class="form-entry">
+        <label>库存:</label>
+    </div>
+    <div nz-col nzSpan="16" class="form-entry">
+        <nz-input-number [(ngModel)]="goods.stock" [nzStep]="1"></nz-input-number>
+    </div>
+</div>
+
+<div nz-row class="modal-footer">
+    <div nz-col nzSpan="4" nzOffset="20">
+        <button nz-button nzType="primary" [nzLoading]="commonService.isLoading" (click)="save()">保存</button>
+    </div>
+</div>

@@ -36,7 +36,8 @@ export class LoginComponent implements OnInit {
         this.validateForm.controls['password'].value)
         .subscribe(res => {
           this.messageService.success('登录成功！');
-          sessionStorage.setItem('token',res.message);
+          sessionStorage.setItem('token', res.message);
+          sessionStorage.setItem('userName', this.validateForm.controls['userName'].value);
           this.router.navigateByUrl('/admin/sys');
         })
     }

@@ -1,0 +1,56 @@
+<div class="list-header">
+    <div nz-row>
+        <div nz-col nzSpan="2" class="search-label">
+            <label>商品名:</label>
+        </div>
+        <div nz-col nzSpan="4">
+            <input nz-input [(ngModel)]="goodsName" />
+        </div>
+        <div nz-col nzSpan="3" nzOffset="15">
+            <button nz-button (click)="search()" nzType="primary">
+                <i nz-icon nzType="search"></i>查询
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="list-body">
+    <nz-table #Table nzTitle="订单列表" nzBordered [nzData]="dataList.list" [nzTotal]="dataList.total"
+        [(nzPageIndex)]="dataList.pageIndex" [(nzPageSize)]="dataList.pageSize" [nzScroll]="{ x: '1100px' }">
+        <thead>
+            <tr>
+                <th nzWidth="100px">商品名</th>
+                <th nzWidth="100px">图片</th>
+                <th nzWidth="100px">客户</th>
+                <th nzWidth="60px">价格</th>
+                <th nzWidth="60px">数量</th>
+                <th nzWidth="60px">状态</th>
+                <th nzWidth="100px">创建时间</th>
+                <th nzWidth="100px">支付时间</th>
+                <th nzWidth="150px" nzRight="0px">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of Table.data">
+                <td>{{ data.goodsName }}</td>
+                <td>{{ data.goodsImage }}</td>
+                <td>{{ data.userName }}</td>
+                <td>{{ data.goodsPrice }}</td>
+                <td>{{ data.goodsCount }}</td>
+                <td>
+                    <nz-badge *ngIf="data.status == 0" nzText="新建未支付" nzStatus="default"></nz-badge>
+                    <nz-badge *ngIf="data.status == 1" nzText="已支付" nzStatus="processing"></nz-badge>
+                    <nz-badge *ngIf="data.status == 2" nzText="已发货" nzStatus="warning"></nz-badge>
+                    <nz-badge *ngIf="data.status == 3" nzText="已收货" nzStatus="processing"></nz-badge>
+                    <nz-badge *ngIf="data.status == 4" nzText="已退款" nzStatus="error"></nz-badge>
+                    <nz-badge *ngIf="data.status == 5" nzText="已完成" nzStatus="success"></nz-badge>
+                </td>
+                <td>{{ data.createDate |cvtdate }}</td>
+                <td>{{ data.payDate |cvtdate }}</td>
+                <td nzRight="0px">
+                    <a (click)="viewDeatil(data)">查看详情</a>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>
