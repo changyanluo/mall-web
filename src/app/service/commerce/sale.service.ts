@@ -17,12 +17,12 @@ export class SaleService {
 
     getGoodsList(pageIndex: number, pageSize: number, goodsName?: string) {
         return this.http.postForm<ServerResult<PageList<Goods>>>(`${this.saleUrl}/getGoodsList`,
-            { goodsName: goodsName });
+            { goodsName: goodsName || '', pageIndex: pageIndex, pageSize: pageSize });
     }
 
     getOrderList(pageIndex: number, pageSize: number, goodsName?: string) {
         return this.http.postForm<ServerResult<PageList<Order>>>(`${this.saleUrl}/getOrderList`,
-            { goodsName: goodsName });
+            { goodsName: goodsName || '', pageIndex: pageIndex, pageSize: pageSize });
     }
 
     addGoods(goods: Goods) {

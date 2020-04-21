@@ -53,12 +53,7 @@ export class RoleListComponent implements OnInit {
       nzContent: RoleEntryComponent,
       nzMaskClosable: false,
       nzComponentParams: { role: role },
-      nzFooter: [{
-        label: '保存',
-        type: 'primary',
-        onClick: (instance: any) => instance.save()
-      }
-      ]
+      nzFooter: null
     });
     modal.afterClose.subscribe(ret => {
       if (ret) this.search();
@@ -109,8 +104,8 @@ export class RoleListComponent implements OnInit {
       });
   }
 
-   //给角色配置操作权限
-   setAuthority(roleId: number) {
+  //给角色配置操作权限
+  setAuthority(roleId: number) {
     this.commonService.isLoading = true;
     forkJoin(this.roleService.getRoleAuthorityList(roleId), this.authorityService.getAuthorityList(''))
       .subscribe(res => {

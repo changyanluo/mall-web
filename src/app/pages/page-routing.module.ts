@@ -9,7 +9,8 @@ const routes: Routes = [
     {//后台管理界面
         path: 'admin', component: LeftMenuComponent,
         children: [
-            { path: 'sys', loadChildren: () => import('./system/system.module').then(m => m.SystemModule) }
+            { path: 'sys', loadChildren: () => import('./system/system.module').then(m => m.SystemModule) },
+            { path: 'mall', loadChildren: () => import('./commerce/commerce.module').then(m => m.CommerceModule) }
         ]
     },
     {//客户界面

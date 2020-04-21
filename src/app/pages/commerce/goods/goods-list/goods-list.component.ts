@@ -19,15 +19,23 @@ export class GoodsListComponent implements OnInit {
   dataList = new PageList();
   goodsName: string;
   isVisible = false;
-  flashSale: FlashSale;
-  basePictureUrl = environment.pictureUrl;
-  
+  flashSale: FlashSale = {
+    id: null,
+    goodsId: 0,
+    flashPrice: 0,
+    stockCount: 0,
+    startDate: null,
+    endDate: null
+  };
+  basePictureUrl = environment.pictureUrl;//图片服务器地址
+
   constructor(private saleService: SaleService,
     private messageService: NzMessageService,
     public commonService: CommonService,
     private modalService: NzModalService) { }
 
   ngOnInit(): void {
+    this.dataList.pageSize = 4;
     this.search();
   }
 
@@ -55,11 +63,7 @@ export class GoodsListComponent implements OnInit {
       nzContent: GoodsEntryComponent,
       nzMaskClosable: false,
       nzComponentParams: { goods: goods },
-      nzFooter: [{
-        label: '保存',
-        type: 'primary',
-        onClick: (instance: any) => instance.save()
-      }]
+      nzFooter: null
     });
     modal.afterClose.subscribe(ret => {
       if (ret) this.search();
@@ -71,12 +75,8 @@ export class GoodsListComponent implements OnInit {
       nzTitle: '修改商品信息',
       nzContent: GoodsEntryComponent,
       nzMaskClosable: false,
-      nzComponentParams: { goods: selectedGoods },
-      nzFooter: [{
-        label: '保存',
-        type: 'primary',
-        onClick: (instance: any) => instance.save()
-      }]
+      nzComponentParams: { goods: JSON.parse(JSON.stringify(selectedGoods)) },
+      nzFooter: null
     });
     modal.afterClose.subscribe(ret => {
       if (ret) this.search();

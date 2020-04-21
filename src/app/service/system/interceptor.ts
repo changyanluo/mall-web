@@ -37,7 +37,7 @@ export class Interceptor implements HttpInterceptor {
                 }
             }),
             catchError((err: HttpErrorResponse) => {
-                this.message.error(err.error.text);
+                this.message.error(err.error.text || err.message);
                 this.commonService.isLoading = false;
                 if (err.error.text === '会话过期!') {
                     this.router.navigateByUrl('/passport');
