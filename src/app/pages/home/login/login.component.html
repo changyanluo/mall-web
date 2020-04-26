@@ -1,4 +1,5 @@
 <div class="login">
+    <nz-spin [nzSpinning]="commonService.isLoading" nzTip="登录中...">
     <div class="login-sector">
         <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
             <nz-form-item>
@@ -27,4 +28,5 @@
             </nz-form-item>
         </form>
     </div>
+    </nz-spin>
 </div>

@@ -39,7 +39,7 @@ export class Interceptor implements HttpInterceptor {
             catchError((err: HttpErrorResponse) => {
                 this.message.error(err.error.text || err.message);
                 this.commonService.isLoading = false;
-                if (err.error.text === '会话过期!') {
+                if (err.error.text === 'session timeout!') {
                     this.router.navigateByUrl('/passport');
                     sessionStorage.removeItem('token');
                 }

@@ -3,7 +3,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../../service/system/user.service';
 import { NzMessageService } from 'ng-zorro-antd';
+import { CommonService } from '../../../service/system/common.service';
 
+//登录界面
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,10 +14,12 @@ import { NzMessageService } from 'ng-zorro-antd';
 export class LoginComponent implements OnInit {
 
   validateForm: FormGroup;
+  isSpinning = false; //loading框
 
   constructor(private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
+    public commonService: CommonService,
     private messageService: NzMessageService) { }
 
   ngOnInit(): void {
@@ -32,6 +36,7 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
     if (this.validateForm.controls['userName'].valid && this.validateForm.controls['password'].valid) {
+      this.commonService.isLoading = true;
       this.userService.login(this.validateForm.controls['userName'].value,
         this.validateForm.controls['password'].value)
         .subscribe(res => {

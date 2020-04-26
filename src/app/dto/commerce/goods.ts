@@ -7,4 +7,5 @@ export interface Goods{
     price:number;
     stock:number;
     state:number; //0:z正常状态,1:促销中
+    producer:string;
 }

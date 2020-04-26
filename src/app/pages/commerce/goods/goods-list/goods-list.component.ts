@@ -56,7 +56,8 @@ export class GoodsListComponent implements OnInit {
       description: '',
       price: 0,
       stock: 0,
-      state: 0
+      state: 0,
+      producer:sessionStorage.getItem("userName")
     }
     const modal = this.modalService.create({
       nzTitle: '添加商品',
