@@ -9,6 +9,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { CommonService } from '../../../../service/system/common.service';
 import { environment } from '../../../../../environments/environment';
 
+//商品列表界面
 @Component({
   selector: 'app-goods-list',
   templateUrl: './goods-list.component.html',
@@ -28,6 +29,7 @@ export class GoodsListComponent implements OnInit {
     endDate: null
   };
   basePictureUrl = environment.pictureUrl;//图片服务器地址
+  maxCount = 0;
 
   constructor(private saleService: SaleService,
     private messageService: NzMessageService,
@@ -57,7 +59,7 @@ export class GoodsListComponent implements OnInit {
       price: 0,
       stock: 0,
       state: 0,
-      producer:sessionStorage.getItem("userName")
+      producer: sessionStorage.getItem("userName")
     }
     const modal = this.modalService.create({
       nzTitle: '添加商品',
@@ -85,15 +87,16 @@ export class GoodsListComponent implements OnInit {
   }
 
   //添加商品到秒杀活动
-  FlashGoods(goodsId: number) {
+  FlashGoods(goods: Goods) {
     this.flashSale = {
       id: null,
-      goodsId: goodsId,
+      goodsId: goods.id,
       flashPrice: 0,
       stockCount: 0,
       startDate: null,
       endDate: null
     };
+    this.maxCount = goods.price;
     this.isVisible = true;
   }
 

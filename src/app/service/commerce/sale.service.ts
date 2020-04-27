@@ -6,6 +6,7 @@ import { Order } from '../../dto/commerce/order';
 import { FlashSale } from '../../dto/commerce/flash-sale';
 import { PageList } from '../../dto/system/server-result';
 
+//商城数据服务
 @Injectable({
     providedIn: 'root'
 })

@@ -10,6 +10,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { UserEntryComponent } from '../user-entry/user-entry.component';
 import { forkJoin } from 'rxjs';
 
+//用户列表界面
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -88,6 +89,7 @@ export class UserListComponent implements OnInit {
   setRole(userId: number) {
     this.roleIdList = [];
     this.selectedUserId = userId;
+    //获取所有角色和该用户已有角色
     forkJoin([this.roleService.getAllRole(''), this.userService.getUserRoleList(userId)])
       .subscribe(res => {
         this.roleOptions = res[0].data;

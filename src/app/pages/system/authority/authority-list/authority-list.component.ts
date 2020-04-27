@@ -4,6 +4,7 @@ import { Authority,UserAuthority } from '../../../../dto/system/authority';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { AuthorityEntryComponent } from '../authority-entry/authority-entry.component';
 
+//权限列表界面
 @Component({
   selector: 'app-authority-list',
   templateUrl: './authority-list.component.html',

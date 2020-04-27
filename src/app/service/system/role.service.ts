@@ -5,6 +5,7 @@ import { Role } from '../../dto/system/role';
 import { Menu } from '../../dto/system/menu';
 import { Authority } from '../../dto/system/authority';
 
+//角色数据服务
 @Injectable({
   providedIn: 'root'
 })

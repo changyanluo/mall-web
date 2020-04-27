@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NzFormatEmitEvent, NzTreeNodeOptions } from 'ng-zorro-antd/core';
+import { NzTreeNodeOptions } from 'ng-zorro-antd/core';
 import { NzTreeComponent } from 'ng-zorro-antd/tree';
 
+//树形数据多选组件
 @Component({
   selector: 'app-tree-select',
   templateUrl: './tree-select.component.html',

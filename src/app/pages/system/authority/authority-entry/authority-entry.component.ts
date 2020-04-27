@@ -4,6 +4,7 @@ import { Authority } from '../../../../dto/system/authority';
 import { CommonService } from '../../../../service/system/common.service';
 import { NzMessageService , NzModalRef} from 'ng-zorro-antd';
 
+//权限录入界面
 @Component({
   selector: 'app-authority-entry',
   templateUrl: './authority-entry.component.html',

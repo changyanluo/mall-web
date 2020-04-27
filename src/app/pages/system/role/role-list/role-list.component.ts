@@ -11,6 +11,7 @@ import { TreeSelectComponent } from '../../../../shared/components/tree-select/t
 import { forkJoin } from 'rxjs';
 import { CommonService } from '../../../../service/system/common.service';
 
+//角色列表界面
 @Component({
   selector: 'app-role-list',
   templateUrl: './role-list.component.html',
@@ -76,6 +77,7 @@ export class RoleListComponent implements OnInit {
   //给角色配置菜单
   setMenu(roleId: number) {
     this.commonService.isLoading = true;
+    //获取所有菜单和该角色已有菜单
     forkJoin(this.roleService.getRoleMenuList(roleId), this.menuService.getMenuList(''))
       .subscribe(res => {
         this.commonService.isLoading = false;
@@ -107,6 +109,7 @@ export class RoleListComponent implements OnInit {
   //给角色配置操作权限
   setAuthority(roleId: number) {
     this.commonService.isLoading = true;
+    //获取所有权限和该角色已有权限
     forkJoin(this.roleService.getRoleAuthorityList(roleId), this.authorityService.getAuthorityList(''))
       .subscribe(res => {
         this.commonService.isLoading = false;

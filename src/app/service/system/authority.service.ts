@@ -3,6 +3,7 @@ import { ServerResult } from '../../dto/system/server-result';
 import { HttpService } from './http.service';
 import { UserAuthority, Authority } from '../../dto/system/authority';
 
+//权限数据服务
 @Injectable({
     providedIn: 'root'
 })

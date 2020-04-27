@@ -3,6 +3,7 @@ import { ServerResult, PageList } from '../../dto/system/server-result';
 import { HttpService } from './http.service';
 import { UserMenu, Menu } from '../../dto/system/menu';
 
+//菜单数据服务
 @Injectable({
   providedIn: 'root'
 })
@@ -12,6 +13,7 @@ export class MenuService {
 
   constructor(private http: HttpService) { }
 
+  //获取树形菜单数据
   getMenuList(menuName?: string) {
     return this.http.postForm<ServerResult<UserMenu[]>>(`${this.menuUrl}/getMenuList`,
       { menuName: menuName });

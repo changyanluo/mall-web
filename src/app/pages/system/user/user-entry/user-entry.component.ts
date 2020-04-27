@@ -4,6 +4,7 @@ import { UserService } from '../../../../service/system/user.service';
 import { CommonService } from '../../../../service/system/common.service';
 import { NzMessageService, NzModalRef } from 'ng-zorro-antd';
 
+//用户录入界面
 @Component({
   selector: 'app-user-entry',
   templateUrl: './user-entry.component.html',

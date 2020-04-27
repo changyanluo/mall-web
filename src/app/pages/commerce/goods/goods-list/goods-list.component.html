@@ -47,7 +47,7 @@
                 <td nzRight="0px">
                     <a (click)="editGoods(data)">编辑</a>
                     <nz-divider nzType="vertical"></nz-divider>
-                    <a *ngIf="data.state != 1" (click)="FlashGoods(data.id)">加入秒杀活动</a>
+                    <a *ngIf="data.state != 1" (click)="FlashGoods(data)">加入秒杀活动</a>
                 </td>
             </tr>
         </tbody>
@@ -69,7 +69,7 @@
             <label>商品数量:</label>
         </div>
         <div nz-col nzSpan="16">
-            <nz-input-number [(ngModel)]="flashSale.stockCount" [nzStep]="1"></nz-input-number>
+            <nz-input-number [(ngModel)]="flashSale.stockCount" [nzStep]="1" [nzMax]="maxCount"></nz-input-number>
         </div>
     </div>
     <div nz-row>

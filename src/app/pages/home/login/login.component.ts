@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
       this.userService.login(this.validateForm.controls['userName'].value,
         this.validateForm.controls['password'].value)
         .subscribe(res => {
+          this.commonService.isLoading = false;
           this.messageService.success('登录成功！');
           sessionStorage.setItem('token', res.message);
           sessionStorage.setItem('userName', this.validateForm.controls['userName'].value);

@@ -3,6 +3,7 @@ import { UserService } from '../../../service/system/user.service'
 import { UserMenu } from '../../../dto/system/menu';
 import { NzMessageService } from 'ng-zorro-antd';
 
+//admin左侧菜单布局
 @Component({
   selector: 'app-left-menu',
   templateUrl: './left-menu.component.html',
@@ -20,9 +21,4 @@ export class LeftMenuComponent implements OnInit {
       this.menus = res.data;
     });
   }
-}
-
-interface TabItem {
-  title: string;
-  url: string;
 }

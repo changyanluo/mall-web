@@ -4,6 +4,7 @@ import { SaleService } from '../../../../service/commerce/sale.service';
 import { NzMessageService, NzModalRef } from 'ng-zorro-antd';
 import { CommonService } from '../../../../service/system/common.service';
 
+//商品录入界面
 @Component({
   selector: 'app-goods-entry',
   templateUrl: './goods-entry.component.html',
@@ -30,7 +31,7 @@ export class GoodsEntryComponent implements OnInit {
       this.messageService.error('请输入商品标题！');
       return;
     }
-    if (this.goods.price <= 0) {
+    if (this.goods.price <= 0 ) {
       this.messageService.error('请输入商品价格！');
       return;
     }

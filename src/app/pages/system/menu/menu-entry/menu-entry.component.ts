@@ -4,6 +4,7 @@ import { Menu } from '../../../../dto/system/menu';
 import { CommonService } from '../../../../service/system/common.service';
 import { NzMessageService , NzModalRef} from 'ng-zorro-antd';
 
+//菜单录入界面
 @Component({
   selector: 'app-menu-entry',
   templateUrl: './menu-entry.component.html',

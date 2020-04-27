@@ -1,3 +1,4 @@
+//商品
 export interface Goods{
     id:number;
     goodsName:string;

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../../../../service/system/menu.service';
 import { Menu, UserMenu } from '../../../../dto/system/menu';
-import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { MenuEntryComponent } from '../menu-entry/menu-entry.component';
 
+//菜单列表界面
 @Component({
   selector: 'app-menu-list',
   templateUrl: './menu-list.component.html',
@@ -30,11 +31,13 @@ export class MenuListComponent implements OnInit {
       });
   }
 
+  //菜单展开事件
   collapse(menu: UserMenu, event: boolean): void {
     menu.expand = event;
     this.openStatus.set(menu.id, event);
   }
 
+  //保存菜单列表的展开状态，以便重新获取数据后恢复
   setExpandStatus(menus: UserMenu[]) {
     for (let menu of menus) {
       if (this.openStatus.has(menu.id)) {
