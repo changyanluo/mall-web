@@ -16,7 +16,7 @@ const routes: Routes = [
     {//客户界面
         path: 'customer', component: TopMenuComponent,
         children: [
-            { path: 'sys', loadChildren: () => import('./system/system.module').then(m => m.SystemModule) }
+            { path: 'dashboard', loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule) }
         ]
     }
 ];

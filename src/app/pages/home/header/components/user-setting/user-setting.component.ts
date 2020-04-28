@@ -12,4 +12,8 @@ export class UserSettingComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //用户登出
+  logout() {
+
+  }
 }
