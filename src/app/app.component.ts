@@ -12,13 +12,12 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // const token = sessionStorage.getItem('token');
-    // if(token){
-    //   this.router.navigateByUrl('/admin/sys');
-    // }
-    // else{
-    //   this.router.navigateByUrl('/passport');
-    // }
-    this.router.navigateByUrl('/customer/dashboard/home');
+    const token = sessionStorage.getItem('token');
+    if(token){
+      this.router.navigateByUrl('/admin/sys');
+    }
+    else{
+      this.router.navigateByUrl('/passport');
+    }
   }
 }

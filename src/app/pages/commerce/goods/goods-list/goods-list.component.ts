@@ -17,7 +17,7 @@ import { environment } from '../../../../../environments/environment';
 })
 export class GoodsListComponent implements OnInit {
 
-  dataList = new PageList();
+  dataList = new PageList<Goods>();
   goodsName: string;
   isVisible = false;
   flashSale: FlashSale = {
@@ -104,6 +104,7 @@ export class GoodsListComponent implements OnInit {
   save() {
     this.saleService.addFlashGoods(this.flashSale).subscribe(res => {
       this.commonService.isLoading = false;
+      this.search();
       this.messageService.success('添加成功!');
       this.isVisible = false;
     });

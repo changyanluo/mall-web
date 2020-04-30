@@ -1,1 +1,21 @@
-<p>customerhome works!</p>
+<div class="cusTitle">
+    <label>秒杀活动</label>
+</div>
+
+<div nz-row>
+    <div *ngFor="let item of flashGoods" nz-col nzSpan="6" nzOffset="2">
+        <nz-card class="flashCard" [nzTitle]="item.goodsName" [nzExtra]="extraTemplate">
+            <div class="cardBody">
+                <img [src]="basePictureUrl + item.image" />
+                <div class="flashTitle">
+                    <p>开始时间：{{ item.startDate |cvtdate}}</p>
+                    <p>结束时间：{{ item.endDate |cvtdate}}</p>
+                    <p>秒杀价：{{ item.flashPrice}}</p>
+                </div>
+            </div>
+            <ng-template #extraTemplate>
+                <a (click)="flash(item)"> 马上抢</a>
+            </ng-template>
+        </nz-card>
+    </div>
+</div>

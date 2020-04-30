@@ -9,6 +9,7 @@ import { MenuListComponent } from './menu/menu-list/menu-list.component';
 import { MenuEntryComponent } from './menu/menu-entry/menu-entry.component';
 import { AuthorityListComponent } from './authority/authority-list/authority-list.component';
 import { AuthorityEntryComponent } from './authority/authority-entry/authority-entry.component';
+import { CustomerhomeComponent } from '../customer/customerhome/customerhome.component';
 
 @NgModule({
     declarations: [
@@ -19,7 +20,8 @@ import { AuthorityEntryComponent } from './authority/authority-entry/authority-e
         MenuListComponent,
         MenuEntryComponent,
         AuthorityListComponent,
-        AuthorityEntryComponent],
+        AuthorityEntryComponent,
+        CustomerhomeComponent],
     imports: [
         SystemRoutingModule,
         SharedModule

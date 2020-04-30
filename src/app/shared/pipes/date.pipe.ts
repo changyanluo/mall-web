@@ -8,6 +8,6 @@ export class DatePipe implements PipeTransform {
     constructor(private commonService: CommonService) { }
 
     transform(date: string) {
-        return this.commonService.formatDate("yyyy-MM-dd", new Date(date));
+        return this.commonService.formatDate("yyyy-MM-dd:hh:mm:ss", new Date(date));
     }
 }

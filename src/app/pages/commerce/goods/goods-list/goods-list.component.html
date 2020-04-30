@@ -20,13 +20,13 @@
     </button>
     <nz-table #Table nzTitle="商品列表" nzFrontPagination="false" nzBordered [nzData]="dataList.list" [nzTotal]="dataList.total"
         [(nzPageIndex)]="dataList.pageIndex" [(nzPageSize)]="dataList.pageSize" (nzPageIndexChange)="search()"
-        [nzScroll]="{ x: '1100px' }">
+        [nzScroll]="{ x: '1500px' }">
         <thead>
             <tr>
                 <th nzWidth="100px">商品名</th>
-                <th nzWidth="120px">商品标题</th>
+                <th nzWidth="180px">商品标题</th>
                 <th nzWidth="100px">图片</th>
-                <th nzWidth="300px">描述</th>
+                <th nzWidth="500px">描述</th>
                 <th nzWidth="80px">价格</th>
                 <th nzWidth="80px">库存</th>
                 <th nzWidth="100px">状态</th>

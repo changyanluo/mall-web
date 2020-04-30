@@ -1,15 +1,14 @@
 <div nz-dropdown [nzDropdownMenu]="menu">
-    <nz-badge [nzCount]="5">
+    <nz-badge [nzCount]="messages.length">
         <i nz-icon nzType="bell"></i>
     </nz-badge>
 </div>
 
 <nz-dropdown-menu #menu="nzDropdownMenu">
     <ul nz-menu nzSelectable>
-        <li nz-menu-item>消息1</li>
-        <li nz-menu-item>消息2</li>
-        <li nz-menu-item>消息3</li>
-        <li nz-menu-item>消息4</li>
-        <li nz-menu-item>消息5</li>
+        <li *ngFor="let msg of messages" nz-menu-item>
+            <p class="msgTitle">{{msg.title}}</p>
+            <p>{{msg.content}}</p>
+        </li>
     </ul>
 </nz-dropdown-menu>
