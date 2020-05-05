@@ -9,13 +9,13 @@
 
 ## 设计
 设计图：
-![系统业务架构]images/system-design.png
+![系统业务架构](images/system-design.png)
 
 架构图：
-![秒杀系统架构]images/flash-framework.png
+![秒杀系统架构](images/flash-framework.png)
 
 秒杀流程:
-![秒杀流程]flash-flow.png
+![秒杀流程](images/flash-flow.png)
 
 
 
