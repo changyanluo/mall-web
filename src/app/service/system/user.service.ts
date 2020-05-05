@@ -21,6 +21,10 @@ export class UserService {
     return this.http.postForm<ServerResult<string>>(`${this.userUrl}/login`, { userName: userName, password: password });
   }
 
+  logout() {
+    return this.http.post<ServerResult<string>>(`${this.userUrl}/logout`,null);
+  }
+
   getUserList(pageIndex: number, pageSize: number, userName: string) {
     return this.http.postForm<ServerResult<PageList<User>>>(`${this.userUrl}/getUserList`,
       { userName: userName, pageIndex: pageIndex, pageSize: pageSize });

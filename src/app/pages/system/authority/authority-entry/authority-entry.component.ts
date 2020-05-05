@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthorityService } from '../../../../service/system/authority.service';
 import { Authority } from '../../../../dto/system/authority';
 import { CommonService } from '../../../../service/system/common.service';
-import { NzMessageService , NzModalRef} from 'ng-zorro-antd';
+import { NzMessageService, NzModalRef } from 'ng-zorro-antd';
 
 //权限录入界面
 @Component({
@@ -12,7 +12,7 @@ import { NzMessageService , NzModalRef} from 'ng-zorro-antd';
 })
 export class AuthorityEntryComponent implements OnInit {
 
-  authority:Authority;
+  authority: Authority;
 
   constructor(private authorityService: AuthorityService,
     public commonService: CommonService,
@@ -29,17 +29,21 @@ export class AuthorityEntryComponent implements OnInit {
     }
     this.commonService.isLoading = true;
     if (!this.authority.id) {
-      this.authorityService.addAuthority(this.authority).subscribe(() => {
-        this.commonService.isLoading = false;
-        this.messageService.success('新增成功!');
-        this.modal.destroy(true);
+      this.authorityService.addAuthority(this.authority).subscribe(res => {
+        if (res.code == 1) {
+          this.commonService.isLoading = false;
+          this.messageService.success('新增成功!');
+          this.modal.destroy(true);
+        }
       });
     }
     else {
-      this.authorityService.updateAuthority(this.authority).subscribe(() => {
-        this.commonService.isLoading = false;
-        this.messageService.success('修改成功!');
-        this.modal.destroy(true);
+      this.authorityService.updateAuthority(this.authority).subscribe(res => {
+        if (res.code == 1) {
+          this.commonService.isLoading = false;
+          this.messageService.success('修改成功!');
+          this.modal.destroy(true);
+        }
       });
     }
     return true;

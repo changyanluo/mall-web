@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthorityService } from '../../../../service/system/authority.service';
-import { Authority,UserAuthority } from '../../../../dto/system/authority';
+import { Authority, UserAuthority } from '../../../../dto/system/authority';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { AuthorityEntryComponent } from '../authority-entry/authority-entry.component';
 
@@ -26,8 +26,10 @@ export class AuthorityListComponent implements OnInit {
   search() {
     this.authorityService.getAuthorityList(this.name)
       .subscribe(res => {
-        this.authorityList = res.data;
-        this.setExpandStatus(this.authorityList);
+        if (res.code == 1) {
+          this.authorityList = res.data;
+          this.setExpandStatus(this.authorityList);
+        }
       });
   }
 

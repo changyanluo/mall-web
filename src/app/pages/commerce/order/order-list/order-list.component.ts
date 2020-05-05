@@ -13,7 +13,7 @@ import { CommonService } from '../../../../service/system/common.service';
 })
 export class OrderListComponent implements OnInit {
 
-  dataList = new PageList();
+  dataList = new PageList<Order>();
   goodsName: string;
 
   constructor(private saleService: SaleService,
@@ -26,13 +26,18 @@ export class OrderListComponent implements OnInit {
   }
 
   search() {
-    this.saleService.getGoodsList(this.dataList.pageIndex, this.dataList.pageSize, this.goodsName)
+    this.commonService.isLoading = true;
+    this.saleService.getOrderList(this.dataList.pageIndex, this.dataList.pageSize, this.goodsName)
       .subscribe(res => {
-        this.dataList.list = res.data.list;
-        this.dataList.total = res.data.total;
+        if (res.code == 1) {
+          this.commonService.isLoading = false;
+          this.dataList.list = res.data.list;
+          this.dataList.total = res.data.total;
+        }
       });
   }
 
+  //查看订单详情ß
   viewDeatil(selectedOrder: Order) {
 
   }

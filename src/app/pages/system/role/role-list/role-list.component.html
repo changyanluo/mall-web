@@ -19,7 +19,8 @@
         <i nz-icon nzType="plus"></i>新增
     </button>
     <nz-table #Table nzTitle="角色列表" nzBordered [nzData]="dataList.list" [nzTotal]="dataList.total"
-        [(nzPageIndex)]="dataList.pageIndex" [(nzPageSize)]="dataList.pageSize" [nzScroll]="{ x: '1100px' }">
+        (nzPageIndexChange)="search()" nzFrontPagination="false" [(nzPageIndex)]="dataList.pageIndex"
+        [(nzPageSize)]="dataList.pageSize" [nzScroll]="{ x: '1100px' }">
         <thead>
             <tr>
                 <th nzWidth="100px">角色名</th>

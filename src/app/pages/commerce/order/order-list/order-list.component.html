@@ -15,25 +15,24 @@
 </div>
 
 <div class="list-body">
-    <nz-table #Table nzTitle="订单列表" nzBordered [nzData]="dataList.list" [nzTotal]="dataList.total"
-        [(nzPageIndex)]="dataList.pageIndex" [(nzPageSize)]="dataList.pageSize" [nzScroll]="{ x: '1100px' }">
+    <nz-table #Table nzTitle="订单列表" nzFrontPagination="false" nzBordered [nzData]="dataList.list"
+        [nzTotal]="dataList.total" [(nzPageIndex)]="dataList.pageIndex" (nzPageIndexChange)="search()"
+        [(nzPageSize)]="dataList.pageSize" [nzScroll]="{ x: '1100px' }">
         <thead>
             <tr>
                 <th nzWidth="100px">商品名</th>
-                <th nzWidth="100px">图片</th>
                 <th nzWidth="100px">客户</th>
                 <th nzWidth="60px">价格</th>
                 <th nzWidth="60px">数量</th>
-                <th nzWidth="60px">状态</th>
-                <th nzWidth="100px">创建时间</th>
-                <th nzWidth="100px">支付时间</th>
-                <th nzWidth="150px" nzRight="0px">操作</th>
+                <th nzWidth="100px">状态</th>
+                <th nzWidth="150px">创建时间</th>
+                <th nzWidth="150px">支付时间</th>
+                <!-- <th nzWidth="150px" nzRight="0px">操作</th> -->
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let data of Table.data">
                 <td>{{ data.goodsName }}</td>
-                <td>{{ data.goodsImage }}</td>
                 <td>{{ data.userName }}</td>
                 <td>{{ data.goodsPrice }}</td>
                 <td>{{ data.goodsCount }}</td>
@@ -47,9 +46,9 @@
                 </td>
                 <td>{{ data.createDate |cvtdate }}</td>
                 <td>{{ data.payDate |cvtdate }}</td>
-                <td nzRight="0px">
+                <!-- <td nzRight="0px">
                     <a (click)="viewDeatil(data)">查看详情</a>
-                </td>
+                </td> -->
             </tr>
         </tbody>
     </nz-table>

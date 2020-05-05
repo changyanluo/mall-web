@@ -26,8 +26,10 @@ export class MenuListComponent implements OnInit {
   search() {
     this.menuService.getMenuList(this.menuName)
       .subscribe(res => {
-        this.menuList = res.data;
-        this.setExpandStatus(this.menuList);
+        if (res.code == 1) {
+          this.menuList = res.data;
+          this.setExpandStatus(this.menuList);
+        }
       });
   }
 
@@ -66,7 +68,7 @@ export class MenuListComponent implements OnInit {
       nzContent: MenuEntryComponent,
       nzMaskClosable: false,
       nzComponentParams: { menu: menu },
-      nzFooter:null
+      nzFooter: null
     });
     modal.afterClose.subscribe(ret => {
       if (ret) this.search();

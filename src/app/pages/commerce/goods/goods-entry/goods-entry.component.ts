@@ -31,7 +31,7 @@ export class GoodsEntryComponent implements OnInit {
       this.messageService.error('请输入商品标题！');
       return;
     }
-    if (this.goods.price <= 0 ) {
+    if (this.goods.price <= 0) {
       this.messageService.error('请输入商品价格！');
       return;
     }
@@ -41,17 +41,21 @@ export class GoodsEntryComponent implements OnInit {
     }
     this.commonService.isLoading = true;
     if (!this.goods.id) {
-      this.saleService.addGoods(this.goods).subscribe(() => {
-        this.commonService.isLoading = false;
-        this.messageService.success('新增成功!');
-        this.modal.destroy(true);
+      this.saleService.addGoods(this.goods).subscribe(res => {
+        if (res.code == 1) {
+          this.commonService.isLoading = false;
+          this.messageService.success('新增成功!');
+          this.modal.destroy(true);
+        }
       });
     }
     else {
-      this.saleService.updateGoods(this.goods).subscribe(() => {
-        this.commonService.isLoading = false;
-        this.messageService.success('修改成功!');
-        this.modal.destroy(true);
+      this.saleService.updateGoods(this.goods).subscribe(res => {
+        if (res.code == 1) {
+          this.commonService.isLoading = false;
+          this.messageService.success('修改成功!');
+          this.modal.destroy(true);
+        }
       });
     }
   }

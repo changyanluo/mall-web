@@ -5,6 +5,7 @@ import { RoleListComponent } from './role/role-list/role-list.component';
 import { MenuListComponent } from './menu/menu-list/menu-list.component';
 import { AuthorityListComponent } from './authority/authority-list/authority-list.component';
 import { CustomerhomeComponent } from '../customer/customerhome/customerhome.component';
+import { LogComponent } from './log/log.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -12,8 +13,8 @@ const routes: Routes = [
   { path: 'user', component: UserListComponent },
   { path: 'role', component: RoleListComponent },
   { path: 'menu', component: MenuListComponent },
-  { path: 'authority', component: AuthorityListComponent }
-
+  { path: 'authority', component: AuthorityListComponent },
+  { path: 'log', component: LogComponent }
 ];
 
 @NgModule({

@@ -20,7 +20,9 @@ export class CustomerhomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.saleService.getCustomerFlashGoods().subscribe(res => {
-      this.flashGoods = res.data;
+      if (res.code == 1) {
+        this.flashGoods = res.data;
+      }
     });
   }
 

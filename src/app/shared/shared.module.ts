@@ -7,12 +7,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TreeSelectComponent } from './components/tree-select/tree-select.component';
 //管道
 import { DatePipe } from './pipes/date.pipe';
-
+import { CuttextPipe } from './pipes/cuttext.pipe';
 //指令
 
 
 const Components = [TreeSelectComponent];
-const Pipes = [DatePipe];
+const Pipes = [DatePipe, CuttextPipe];
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ const Pipes = [DatePipe];
     ...Pipes,
     ...Components
   ],
-  entryComponents:[
+  entryComponents: [
     ...Components
   ]
 })

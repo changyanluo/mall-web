@@ -1,0 +1,54 @@
+<div class="list-header">
+    <div nz-row>
+        <div nz-col nzSpan="2" class="search-label">
+            <label>用户名:</label>
+        </div>
+        <div nz-col nzSpan="4">
+            <input nz-input [(ngModel)]="userName" />
+        </div>
+        <div nz-col nzSpan="2" class="search-label">
+            <label>操作名:</label>
+        </div>
+        <div nz-col nzSpan="4">
+            <input nz-input [(ngModel)]="actionName" />
+        </div>
+        <div nz-col nzSpan="3" nzOffset="7">
+            <button nz-button (click)="search()" nzType="primary">
+                <i nz-icon nzType="search"></i>查询
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="list-body">
+    <nz-table #Table nzTitle="操作日志列表" nzFrontPagination="false" nzBordered
+        [nzData]="dataList.list" [nzTotal]="dataList.total" (nzPageIndexChange)="search()"
+        [(nzPageIndex)]="dataList.pageIndex" [(nzPageSize)]="dataList.pageSize" [nzScroll]="{ x: '2500px'}">
+        <thead>
+            <tr>
+                <th nzWidth="100px">用户名</th>
+                <th nzWidth="200px">操作名</th>
+                <th nzWidth="100px">操作服务地址</th>
+                <th nzWidth="250px">请求数据</th>
+                <th nzWidth="250px">返回数据</th>
+                <th nzWidth="250px">创建时间</th>
+                <th nzWidth="150px">执行时间（毫秒）</th>
+                <th nzWidth="150px">请求IP地址</th>
+                <th nzWidth="300px">调用堆栈</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of Table.data">
+                <td>{{ data.userName }}</td>
+                <td>{{ data.actionName }}</td>
+                <td>{{ data.actionUrl }}</td>
+                <td>{{ data.messageIncoming }}</td>
+                <td nz-tooltip [nzTooltipTitle]="data.messageReturned">{{ data.messageReturned|cuttext }}</td>
+                <td>{{ data.createTime |cvtdate}}</td>
+                <td>{{ data.timespan }}</td>
+                <td>{{ data.ip }}</td>
+                <td>{{ data.stack|cuttext }}</td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>

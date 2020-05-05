@@ -18,7 +18,8 @@
     <button nz-button (click)="addGoods()" nzType="primary">
         <i nz-icon nzType="plus"></i>新增
     </button>
-    <nz-table #Table nzTitle="商品列表" nzFrontPagination="false" nzBordered [nzData]="dataList.list" [nzTotal]="dataList.total"
+    <nz-table #Table nzTitle="商品列表" nzFrontPagination="false" nzBordered [nzData]="dataList.list" 
+       [nzTotal]="dataList.total"  
         [(nzPageIndex)]="dataList.pageIndex" [(nzPageSize)]="dataList.pageSize" (nzPageIndexChange)="search()"
         [nzScroll]="{ x: '1500px' }">
         <thead>

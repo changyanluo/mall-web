@@ -5,7 +5,8 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { environment } from '../../../environments/environment';
 import { HttpService } from './http.service';
 import { SysMessage } from '../../dto/system/sys-message';
-import { ServerResult } from '../../dto/system/server-result';
+import { ServerResult, PageList } from '../../dto/system/server-result';
+import { ServerLog } from '../../dto/system/log';
 
 //消息数据服务
 @Injectable({
@@ -24,7 +25,7 @@ export class MessageService {
     this.ws = new WebSocket(this.wsUrl + "?token=" + sessionStorage.getItem("token"));
     const self = this;
     this.ws.onerror = function (ev: Event) {
-      self.messageService.error(ev.toString());
+      self.messageService.error('webSocket出错!');
     }
     this.ws.onmessage = function (ev: MessageEvent) {
       self.messageReceived.next(ev);
@@ -36,6 +37,12 @@ export class MessageService {
     const userName = sessionStorage.getItem("userName");
     return this.http.postForm<ServerResult<SysMessage[]>>("/user/getUserMessage",
       { userName: userName });
+  }
+
+  //获取用户操作日志
+  getOperationLog(pageIndex: number, pageSize: number, userName: string, actionName: string) {
+    return this.http.postForm<ServerResult<PageList<ServerLog>>>("/user/getOperationLog",
+      { userName: userName, actionName: actionName, pageIndex: pageIndex, pageSize: pageSize });
   }
 
   closeConnection() {

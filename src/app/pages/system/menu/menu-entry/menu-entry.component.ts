@@ -33,17 +33,21 @@ export class MenuEntryComponent implements OnInit {
     }
     this.commonService.isLoading = true;
     if (!this.menu.id) {
-      this.menuService.addMenu(this.menu).subscribe(() => {
+      this.menuService.addMenu(this.menu).subscribe(res=> {
+        if (res.code == 1) {
         this.commonService.isLoading = false;
         this.messageService.success('新增成功!');
         this.modal.destroy(true);
+        }
       });
     }
     else {
-      this.menuService.updateMenu(this.menu).subscribe(() => {
+      this.menuService.updateMenu(this.menu).subscribe(res => {
+        if (res.code == 1) {
         this.commonService.isLoading = false;
         this.messageService.success('修改成功!');
         this.modal.destroy(true);
+        }
       });
     }
     return true;

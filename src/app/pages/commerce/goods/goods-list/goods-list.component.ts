@@ -42,10 +42,14 @@ export class GoodsListComponent implements OnInit {
   }
 
   search() {
+    this.commonService.isLoading = true;
     this.saleService.getGoodsList(this.dataList.pageIndex, this.dataList.pageSize, this.goodsName)
       .subscribe(res => {
-        this.dataList.list = res.data.list;
-        this.dataList.total = res.data.total;
+        if (res.code == 1) {
+          this.commonService.isLoading = false;
+          this.dataList.list = res.data.list;
+          this.dataList.total = res.data.total;
+        }
       });
   }
 
@@ -96,17 +100,19 @@ export class GoodsListComponent implements OnInit {
       startDate: null,
       endDate: null
     };
-    this.maxCount = goods.price;
+    this.maxCount = goods.stock;
     this.isVisible = true;
   }
 
   //保存秒杀商品
   save() {
     this.saleService.addFlashGoods(this.flashSale).subscribe(res => {
-      this.commonService.isLoading = false;
-      this.search();
-      this.messageService.success('添加成功!');
-      this.isVisible = false;
+      if (res.code == 1) {
+        this.commonService.isLoading = false;
+        this.search();
+        this.messageService.success('添加成功!');
+        this.isVisible = false;
+      }
     });
   }
 }

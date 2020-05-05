@@ -19,7 +19,7 @@ import { forkJoin } from 'rxjs';
 export class UserListComponent implements OnInit {
 
   userName = '';
-  dataList = new PageList();
+  dataList = new PageList<User>();
   roleIdList: number[];
   roleOptions: Role[];
 
@@ -37,8 +37,10 @@ export class UserListComponent implements OnInit {
   }
 
   search() {
+    this.commonService.isLoading = true;
     this.userService.getUserList(this.dataList.pageIndex, this.dataList.pageSize, this.userName)
       .subscribe(res => {
+        this.commonService.isLoading = false;
         this.dataList.list = res.data.list;
         this.dataList.total = res.data.total;
       });
@@ -61,11 +63,7 @@ export class UserListComponent implements OnInit {
       nzContent: UserEntryComponent,
       nzMaskClosable: false,
       nzComponentParams: { user: user },
-      nzFooter: [{
-        label: '保存',
-        type: 'primary',
-        onClick: (instance: any) => instance.save()
-      }]
+      nzFooter: null
     });
     modal.afterClose.subscribe(ret => {
       if (ret) this.search();

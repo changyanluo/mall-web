@@ -29,17 +29,21 @@ export class RoleEntryComponent implements OnInit {
     }
     this.commonService.isLoading = true;
     if (!this.role.id) {
-      this.roleService.addRole(this.role).subscribe(() => {
-        this.commonService.isLoading = false;
-        this.messageService.success('新增成功!');
-        this.modal.destroy(true);
+      this.roleService.addRole(this.role).subscribe(res => {
+        if (res.code == 1) {
+          this.commonService.isLoading = false;
+          this.messageService.success('新增成功!');
+          this.modal.destroy(true);
+        }
       });
     }
     else {
-      this.roleService.updateRole(this.role).subscribe(() => {
-        this.commonService.isLoading = false;
-        this.messageService.success('修改成功!');
-        this.modal.destroy(true);
+      this.roleService.updateRole(this.role).subscribe(res => {
+        if (res.code == 1) {
+          this.commonService.isLoading = false;
+          this.messageService.success('修改成功!');
+          this.modal.destroy(true);
+        }
       });
     }
   }

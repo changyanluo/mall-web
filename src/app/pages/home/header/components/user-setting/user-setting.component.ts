@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../../../../service/system/user.service';
+import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-user-setting',
@@ -7,13 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserSettingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router,
+    private userService: UserService,
+    private messageService: NzMessageService) { }
 
   ngOnInit(): void {
   }
 
   //用户登出
   logout() {
-
+    this.userService.logout().subscribe(res=>{
+      this.messageService.success('登出成功');
+      sessionStorage.removeItem('token');
+      sessionStorage.removeItem('userName');
+      this.router.navigateByUrl('/passport');
+    });
   }
 }

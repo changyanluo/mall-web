@@ -20,7 +20,7 @@ import { CommonService } from '../../../../service/system/common.service';
 export class RoleListComponent implements OnInit {
 
   roleName = '';
-  dataList = new PageList();
+  dataList = new PageList<Role>(); ßß
 
   constructor(private roleService: RoleService,
     private menuService: MenuService,
@@ -34,8 +34,10 @@ export class RoleListComponent implements OnInit {
   }
 
   search() {
+    this.commonService.isLoading = true;
     this.roleService.getRoleList(this.dataList.pageIndex, this.dataList.pageSize, this.roleName)
       .subscribe(res => {
+        this.commonService.isLoading = false;
         this.dataList.list = res.data.list;
         this.dataList.total = res.data.total;
       });
@@ -97,8 +99,10 @@ export class RoleListComponent implements OnInit {
               const selectMenuIds = instance.getSelectedIds();
               this.roleService.setRoleMenu(roleId, selectMenuIds)
                 .subscribe(res => {
-                  this.messageService.success('设置成功！');
-                  modal.destroy();
+                  if (res.code == 1) {
+                    this.messageService.success('设置成功！');
+                    modal.destroy();
+                  }
                 })
             }
           }]
@@ -129,8 +133,10 @@ export class RoleListComponent implements OnInit {
               const selectAuthorityIds = instance.getSelectedIds();
               this.roleService.setRoleAuthority(roleId, selectAuthorityIds)
                 .subscribe(res => {
-                  this.messageService.success('设置成功！');
-                  modal.destroy();
+                  if (res.code == 1) {
+                    this.messageService.success('设置成功！');
+                    modal.destroy();
+                  }
                 })
             }
           }]
