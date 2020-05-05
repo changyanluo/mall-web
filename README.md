@@ -9,13 +9,13 @@
 
 ## 设计
 设计图：
-![系统业务架构]https://raw.githubusercontent.com/changyanluo/images/master/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.png
+![系统业务架构]images/system-design.png
 
 架构图：
-![秒杀系统架构]https://raw.githubusercontent.com/changyanluo/images/master/%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%9B%BE.png
+![秒杀系统架构]images/flash-framework.png
 
 秒杀流程:
-![秒杀流程]https://raw.githubusercontent.com/changyanluo/images/master/%E7%A7%92%E6%9D%80%E6%B5%81%E7%A8%8B.png
+![秒杀流程]flash-flow.png
 
 
 
