@@ -9,11 +9,11 @@
 
 ## 设计
 设计图：
-<img src="src/assets/images/system-design.png" /> 
+<img src="http://39.100.129.68/pictures/system-design.png" /> 
 架构图：
-<img src="src/assets/images/flash-framework.png" /> 
+<img src="http://39.100.129.68/pictures/flash-framework.png" /> 
 秒杀流程:
-<img src="src/assets/images/flash-flow.png" /> 
+<img src="http://39.100.129.68/pictures/flash-flow.png" /> 
 
 
 
